@@ -61,6 +61,14 @@ public class RunRepository {
 
         Assert.state(updated == 1, "Failed to delete run " + id);
     }
+
+    public int count() {
+        return jdbcClient.sql("select * from run").query().listOfRows().size();
+    }
+
+    public void saveAll(List<Run> runs) {
+        runs.stream().forEach(this::create);
+    }
 //    @PostConstruct // Do initialization in this class.
 //    private void init() {
 //        runs.add(new Run(1,
